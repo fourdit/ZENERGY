@@ -1,0 +1,304 @@
+/* ============================================
+   ZENERGY - Authentication Pages Styles
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+}
+
+.auth-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ============================================
+   LEFT SIDE - WELCOME SECTION
+   ============================================ */
+.auth-left {
+    flex: 1;
+    background: linear-gradient(135deg, #87CEEB 0%, #4A90E2 50%, #FFA500 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-left::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: backgroundMove 20s linear infinite;
+}
+
+@keyframes backgroundMove {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(50px, 50px);
+    }
+}
+
+.welcome-title {
+    font-size: 64px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: #1a1a1a;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.welcome-subtitle {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #2a2a2a;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   RIGHT SIDE - FORM SECTION
+   ============================================ */
+.auth-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 40px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.auth-logo img {
+    height: 50px;
+    width: auto;
+}
+
+.auth-logo .brand-name {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0BA6DF;
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+}
+
+.form-group input {
+    padding: 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0BA6DF;
+    box-shadow: 0 0 0 3px rgba(11, 166, 223, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #bbb;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -10px;
+}
+
+.link {
+    color: #0BA6DF;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.link:hover {
+    color: #0990c4;
+    text-decoration: underline;
+}
+
+.btn {
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background: #0BA6DF;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0990c4;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(11, 166, 223, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+/* ============================================
+   ALERTS
+   ============================================ */
+.alert {
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 1024px) {
+    .auth-left {
+        padding: 60px 40px;
+    }
+    
+    .welcome-title {
+        font-size: 48px;
+    }
+    
+    .welcome-subtitle {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-container {
+        flex-direction: column;
+    }
+    
+    .auth-left {
+        min-height: 40vh;
+        padding: 40px 30px;
+    }
+    
+    .welcome-title {
+        font-size: 36px;
+    }
+    
+    .welcome-subtitle {
+        font-size: 18px;
+    }
+    
+    .auth-right {
+        padding: 30px 20px;
+    }
+    
+    .auth-card {
+        padding: 40px 30px;
+    }
+}
