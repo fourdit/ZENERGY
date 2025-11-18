@@ -19,6 +19,8 @@ $current_user = get_logged_in_user();
     
     <!-- CSS -->
     <link rel="stylesheet" href="/zenergy/public/css/app.css">
+    <link rel="stylesheet" href="/zenergy/public/css/style.css">
+    <link rel="stylesheet" href="/zenergy/public/css/calculator.css">
 </head>
 <body>
     <div class="app-container">
