@@ -37,13 +37,18 @@ $default_tariff = 1352; // Tarif R1 900 VA
 
 // Include header
 ?>
+<head>
+    <link rel="stylesheet" href="/zenergy/public/css/calculator.css">
+</head>
 
-<!-- Konten Kalkulator -->
-<div class="calculator-container">
-    <!-- Header -->
-    <div class="calculator-header">
-        <h1>Hitung Potensi Hematmu!</h1>
-    </div>
+
+<!-- Tambahkan wrapper class di sini -->
+<div class="calc-page-wrapper">
+    <div class="calculator-container">
+        <!-- Semua konten calculator di sini -->
+        <div class="calculator-header">
+            <h1>Hitung Potensi Hematmu!</h1>
+        </div>
     
     <!-- Form Container -->
     <div class="calculator-form">

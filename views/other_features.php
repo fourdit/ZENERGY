@@ -143,11 +143,14 @@ function getQuestionsByCategory($questions, $categoryId) {
 // Include header
 ?>
 
-<div class="faq-container">
-    <div class="faq-header">
-        <h1>Pusat Bantuan Zenergy</h1>
-        <p class="subtitle">Semua jawaban atas pertanyaan umum ada di sini.</p>
-    </div>
+<!-- Tambahkan wrapper class di sini -->
+<div class="faq-page-wrapper">
+    <div class="faq-container">
+        <!-- Semua konten FAQ di sini -->
+        <div class="faq-header">
+            <h1>Pusat Bantuan Zenergy</h1>
+            <p class="subtitle">Semua jawaban atas pertanyaan umum ada di sini.</p>
+        </div>
     
     <div class="tab-navigation">
         <button class="tab-btn active" data-category="semua">Semua</button>
