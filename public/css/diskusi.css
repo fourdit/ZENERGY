@@ -1,0 +1,114 @@
+/* ======================
+   FORUM SECTION (FIXED)
+   ====================== */
+
+/* Judul section + warna teks */
+.forum-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    margin: 20px 0 10px;
+    font-size: 22px;
+    font-weight: bold;
+
+    color: #F7931E !important;
+    background: transparent !important;
+
+    /* PRIORITAS TERTINGGI */
+    -webkit-text-fill-color: #F7931E !important;
+}
+
+/* Memaksa semua elemen di dalamnya ikut oranye */
+.forum-section-title * {
+    color: #F7931E !important;
+    -webkit-text-fill-color: #F7931E !important;
+}
+
+/* Icon jadi oranye */
+   .forum-section-title {
+    position: relative;
+    z-index: 20;
+
+    padding: 12px 15px;
+    background: #fff !important;   /* <-- FIX UTAMA */
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 22px;
+    font-weight: bold;
+    color: #F7931E !important;
+}
+
+
+
+/* ======================
+   KARTU FORUM
+   ====================== */
+
+.forum-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 15px;
+    border: 1px solid #000;
+}
+
+.forum-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.forum-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.forum-user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* komentar */
+.comment-section {
+    margin-top: 10px;
+    padding-left: 10px;
+    border-left: 3px solid #ddd;
+}
+
+.comment-item {
+    padding: 6px 0;
+    font-size: 13px;
+}
+
+.comment-time {
+    font-size: 11px;
+    color: #777;
+}
+
+.comment-form {
+    display: flex;
+    margin-top: 10px;
+    gap: 5px;
+}
+
+.comment-form input {
+    flex: 1;
+    padding: 7px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.post-img {
+    width: 180px !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    margin-top: 10px;
+}
