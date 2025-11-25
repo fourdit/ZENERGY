@@ -114,4 +114,12 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   PRIMARY KEY (`id`),
   INDEX `idx_sessions_user_id` (`user_id`),
   INDEX `idx_sessions_last_activity` (`last_activity`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Tabel sessions';
+
+-- buat sistem badge dan point
+ALTER TABLE `users`
+ADD COLUMN `points` INT DEFAULT 0 AFTER `profile_photo_path`,
+ADD COLUMN `last_login_date` DATE NULL DEFAULT NULL AFTER `points`,
+ADD COLUMN `last_claim` DATE NULL DEFAULT NULL AFTER `last_login_date`,
+ADD COLUMN `login_count` INT DEFAULT 0 AFTER `last_claim`;
