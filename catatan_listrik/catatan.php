@@ -1,50 +1,90 @@
 <?php
+
 // File ini HANYA berisi konten (tanpa include header/footer)
+
 // Header & Footer sudah di-include oleh dispatcher_catatan.php
+
 $user = get_logged_in_user();
+
 // Ambil filter
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'daily';
 
 // Ambil data catatan berdasarkan filter
-$notes = get_electricity_notes_by_filter($_SESSION['user_id'], $filter);
+$currentMonth = isset($_GET['month']) ? intval($_GET['month']) : intval(date('n'));
+$currentYear  = isset($_GET['year']) ? intval($_GET['year']) : intval(date('Y'));
+
+$notes = get_electricity_notes_by_filter($_SESSION['user_id'], $filter, $currentMonth, $currentYear);
+
 $total_cost = calculate_total_cost($notes);
 
 // Ambil flash message
 $flash = get_flash_message();
+
+// Helper: dapatkan minggu ke berapa dalam sebuah bulan
+function get_week_of_month($date) {
+    $firstDay = date('Y-m-01', strtotime($date));
+    $day     = date('j', strtotime($date));
+    $weekDay = date('N', strtotime($firstDay));
+    return intval(ceil(($day + $weekDay - 1) / 7));
+}
+
+// ==== GROUPING UNTUK FILTER KHUSUS ==== //
+if ($filter === 'weekly') {
+    $weeks = [];
+    foreach ($notes as $note) {
+        $weekNum = get_week_of_month($note['date']);
+        $weeks[$weekNum][] = $note;
+    }
+}
+if ($filter === 'monthly') {
+    $recap_per_month = [];
+    for($m = 1; $m <= 12; $m++) $recap_per_month[$m] = 0;
+    foreach($notes as $note) {
+        $month = intval(date('n', strtotime($note['date'])));
+        $recap_per_month[$month] += $note['total_cost'];
+    }
+}
+if ($filter === 'yearly') {
+    $total = calculate_total_cost($notes);
+}
 ?>
 
-<!-- KONTEN HALAMAN (Langsung dimulai tanpa <html> atau <body>) -->
+<!-- KONTEN HALAMAN -->
 <div class="electricity-container">
+
     <div class="electricity-header">
         <h1>Catatan Listrik</h1>
     </div>
-    
+
     <?php if ($flash): ?>
         <div class="alert alert-<?php echo $flash['type']; ?>">
             <i class="bi bi-<?php echo $flash['type'] == 'success' ? 'check-circle-fill' : 'exclamation-circle-fill'; ?>"></i>
             <?php echo htmlspecialchars($flash['message']); ?>
         </div>
     <?php endif; ?>
-    
-    <div class="filter-section">
-        <div class="filter-navigation">
-            <button class="nav-arrow" onclick="changeMonth('prev')">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-            <span class="current-month" id="current-month">Okt 2025</span>
-            <button class="nav-arrow" onclick="changeMonth('next')">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-        </div>
+
+   <div class="filter-section">
+        <?php if ($filter === 'daily' || $filter === 'weekly') : ?>
+            <div class="filter-navigation" style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                <button class="nav-arrow" onclick="navigateMonth(-1)">
+                 &#60;
+                </button>
+                <span class="current-month" id="current-month">
+                    <?php 
+                        $months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
+                        echo "{$months[$currentMonth-1]} {$currentYear}";
+                    ?>
+                </span>
+                <button class="nav-arrow" onclick="navigateMonth(1)">
+                    &#62;
+                </button>
+            </div>
+        <?php endif; ?>
         <button onclick="window.location.href='dispatcher_catatan.php?fitur=create'" class="btn btn-primary">
             Buat catatan
         </button>
     </div>
-    
+
     <div class="filter-tabs">
         <a href="dispatcher_catatan.php?fitur=catatan&filter=daily" 
            class="filter-tab <?php echo $filter === 'daily' ? 'active' : ''; ?>">
@@ -63,49 +103,93 @@ $flash = get_flash_message();
             Tahunan
         </a>
     </div>
-    
+
     <?php if (empty($notes)): ?>
         <div class="empty-state">
             <p>Belum ada catatan</p>
         </div>
     <?php else: ?>
+
         <div class="total-cost-section">
             <span class="total-label">Biaya Listrik</span>
-            <span class="total-amount"><?php echo number_format($total_cost, 0, ',', '.'); ?></span>
+            <span class="total-amount"><?= number_format($total_cost, 0, ',', '.'); ?></span>
         </div>
-        
+
         <div class="notes-list">
+
+        <?php if ($filter === 'weekly'): ?>
+            <?php
+            $maxWeeks = 5;
+            $monthNames = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agt','Sep','Okt','Nov','Des'];
+            for ($w = 1; $w <= $maxWeeks; $w++):
+                $weekNotes = isset($weeks[$w]) ? $weeks[$w] : [];
+                $amount = array_sum(array_column($weekNotes, 'total_cost'));
+                // Hitung rentang tanggal (misal: 01.07 ~ 07.07)
+                $startDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-01 +".(($w-1)*7)." days"));
+                $endDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-01 +".(($w*7-1))." days"));
+                // Format: 01.07 ~ 07.07
+                $start = date('d.m', strtotime($startDate));
+                $end = date('d.m', strtotime($endDate));
+                $isActive = (date('W', strtotime(date('Y-m-d'))) == $w) ? ' current' : '';
+            ?>
+            <div class="week-row custom-week-row<?= $isActive ?>">
+                <span class="week-badge">Minggu <?= $w ?><br><span class="week-range"><?= $start ?> ~ <?= $end ?></span></span>
+                <span class="week-total"><?= number_format($amount, 0, ',', '.') ?></span>
+            </div>
+            <?php endfor; ?>
+
+       <?php elseif ($filter === 'monthly'): ?>
+            <?php
+            $monthNames = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agt','Sep','Okt','Nov','Des'];
+            for ($m = 1; $m <= 12; $m++):
+                $isActive = ($currentMonth == $m) ? ' current' : '';
+            ?>
+            <div class="month-row custom-month-row<?= $isActive ?>">
+                <span class="month-badge<?= $isActive ? ' active' : '' ?>"><?= $monthNames[$m-1] ?></span>
+                <span class="month-total"><?= number_format($recap_per_month[$m], 0, ',', '.') ?></span>
+            </div>
+            <?php endfor; ?>
+
+        <?php elseif ($filter === 'yearly'): ?>
+            <div class="year-row custom-year-row current">
+                <span class="year-badge"><?= $currentYear ?></span>
+                <span class="year-total"><?= number_format($total, 0, ',', '.') ?></span>
+            </div>
+
+        <?php else: /* DAILY/default, tampilkan catatan harian format card default */ ?>
             <?php foreach ($notes as $note): ?>
-                <div class="note-card" onclick="showActionModal(<?php echo $note['id']; ?>)" style="cursor: pointer;">
-                    <div class="note-header">
-                        <div class="note-date">
-                            <span class="date-day"><?php echo date('d', strtotime($note['date'])); ?></span>
-                            <span class="date-month-year"><?php echo date('m.Y', strtotime($note['date'])); ?></span>
-                            <span class="date-dayname"><?php echo format_day_name($note['date']); ?></span>
-                        </div>
-                        <div class="note-info">
-                            <span>Biaya per kWh: <?php echo number_format($note['price_per_kwh'], 2, ',', '.'); ?></span>
-                            <span>Daya rumah: <?php echo number_format($note['house_power']); ?> VA</span>
-                            <span class="note-total"><?php echo number_format($note['total_cost'], 0, ',', '.'); ?></span>
-                        </div>
+            <div class="note-card" onclick="showActionModal(<?php echo $note['id']; ?>)" style="cursor: pointer;">
+                <div class="note-header">
+                    <div class="note-date">
+                        <span class="date-day"><?php echo date('d', strtotime($note['date'])); ?></span>
+                        <span class="date-month-year"><?php echo date('m.Y', strtotime($note['date'])); ?></span>
+                        <span class="date-dayname"><?php echo format_day_name($note['date']); ?></span>
                     </div>
-                    <div class="note-items">
-                        <?php 
-                        $items = get_electricity_items_by_note_id($note['id']);
-                        foreach ($items as $item): 
-                        ?>
-                            <div class="item-row">
-                                <span class="item-name"><?php echo htmlspecialchars($item['appliance_name']); ?></span>
-                                <span class="item-detail"><?php echo $item['wattage']; ?> watt</span>
-                                <span class="item-detail"><?php echo $item['duration_hours']; ?> jam <?php echo $item['duration_minutes']; ?> menit</span>
-                                <span class="item-cost"><?php echo number_format($item['cost'], 0, ',', '.'); ?></span>
-                            </div>
-                        <?php endforeach; ?>
+                    <div class="note-info">
+                        <span>Biaya per kWh: <?php echo number_format($note['price_per_kwh'], 2, ',', '.'); ?></span>
+                        <span>Daya rumah: <?php echo number_format($note['house_power']); ?> VA</span>
+                        <span class="note-total"><?php echo number_format($note['total_cost'], 0, ',', '.'); ?></span>
                     </div>
                 </div>
+                <div class="note-items">
+                    <?php 
+                    $items = get_electricity_items_by_note_id($note['id']);
+                    foreach ($items as $item): 
+                    ?>
+                        <div class="item-row">
+                            <span class="item-name"><?php echo htmlspecialchars($item['appliance_name']); ?></span>
+                            <span class="item-detail"><?php echo $item['wattage']; ?> watt</span>
+                            <span class="item-detail"><?php echo $item['duration_hours']; ?> jam <?php echo $item['duration_minutes']; ?> menit</span>
+                            <span class="item-cost"><?php echo number_format($item['cost'], 0, ',', '.'); ?></span>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
             <?php endforeach; ?>
+        <?php endif; ?>
         </div>
     <?php endif; ?>
+
 </div>
 
 <!-- Modal Action -->
@@ -138,11 +222,9 @@ let selectedNoteId = null;
 function showActionModal(noteId) {
     selectedNoteId = noteId;
     document.getElementById('actionModal').style.display = 'flex';
-    
     document.getElementById('editBtn').onclick = function() {
         window.location.href = 'dispatcher_catatan.php?fitur=edit&id=' + noteId;
     };
-    
     document.getElementById('deleteBtn').onclick = function() {
         if (confirm('Apakah Anda yakin ingin menghapus catatan ini?')) {
             window.location.href = 'dispatcher_catatan.php?fitur=delete&id=' + noteId;
@@ -162,19 +244,20 @@ window.onclick = function(event) {
     }
 }
 
-let currentDate = new Date();
-
-function changeMonth(direction) {
-    if (direction === 'prev') {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-    } else {
-        currentDate.setMonth(currentDate.getMonth() + 1);
+function navigateMonth(direction) {
+    let bulan = <?= $currentMonth ?>;
+    let tahun = <?= $currentYear ?>;
+    bulan = bulan + direction;
+    if(bulan < 1) {
+        bulan = 12;
+        tahun -= 1;
     }
-    
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-    const monthName = months[currentDate.getMonth()];
-    const year = currentDate.getFullYear();
-    
-    document.getElementById('current-month').textContent = `${monthName} ${year}`;
+    if(bulan > 12) {
+        bulan = 1;
+        tahun += 1;
+    }
+    // Pertahankan filter aktif
+    const filter = '<?= $filter ?>';
+    window.location.href = `dispatcher_catatan.php?fitur=catatan&filter=${filter}&month=${bulan}&year=${tahun}`;
 }
 </script>

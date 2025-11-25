@@ -3,39 +3,34 @@
 // PSPEC: Get Electricity Notes By Filter
 // Input: user_id, filter (daily/weekly/monthly/yearly)
 // Output: Array of notes
-function get_electricity_notes_by_filter($user_id, $filter = 'daily') {
+function get_electricity_notes_by_filter($user_id, $filter = 'daily', $month = null, $year = null) {
     $conn = get_db_connection();
     $user_id = mysqli_real_escape_string($conn, $user_id);
-    
-    // Build query berdasarkan filter
+
+    if ($month === null) $month = date('n');
+    if ($year === null) $year = date('Y');
+
     $where_clause = "user_id = '$user_id'";
-    
+
     switch ($filter) {
         case 'weekly':
-            $start_of_week = date('Y-m-d', strtotime('monday this week'));
-            $end_of_week = date('Y-m-d', strtotime('sunday this week'));
-            $where_clause .= " AND date BETWEEN '$start_of_week' AND '$end_of_week'";
-            break;
-        case 'monthly':
-            $month = date('m');
-            $year = date('Y');
+        case 'daily':
             $where_clause .= " AND MONTH(date) = '$month' AND YEAR(date) = '$year'";
             break;
-        case 'yearly':
-            $year = date('Y');
+        case 'monthly':
             $where_clause .= " AND YEAR(date) = '$year'";
             break;
-        default: // daily
-            $today = date('Y-m-d');
-            $where_clause .= " AND date = '$today'";
+        case 'yearly':
+        default:
+            // semua tahun, tidak filter
             break;
     }
-    
+
     $query = "SELECT id, user_id, date, price_per_kwh, house_power, total_cost 
               FROM electricity_notes 
               WHERE $where_clause 
               ORDER BY date DESC";
-    
+
     $result = mysqli_query($conn, $query);
     $notes = [];
     
