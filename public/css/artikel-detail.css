@@ -1,0 +1,70 @@
+/* Font untuk artikel detail saja */
+.art-detail-wrapper,
+.art-detail-wrapper * {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.art-detail-wrapper {
+    width: 100%;
+    padding: 30px 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.art-detail-card {
+    width: 100%;
+    max-width: 900px;
+    background: linear-gradient(to bottom, #f5b168, #f2a15a);
+    padding: 40px;
+    border-radius: 22px;
+}
+
+.art-back {
+    text-decoration: none;
+    color: #5a3300;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.art-title {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #4a2600;
+}
+
+.art-img {
+    width: 100%;
+    max-width: 500px;   /* gambar tidak bisa lebih lebar dari 600px */
+    height: auto;
+    border-radius: 14px;
+    display: block;
+    margin: 20px auto;  /* supaya center */
+}
+
+
+.art-content {
+    background: #ffe2c7;
+    padding: 30px;
+    border-radius: 18px;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #4a2600;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.art-content h2 {
+    margin-top: 22px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.back-icon {
+    width: 30px;
+    height: auto;
+    display: block;
+}
