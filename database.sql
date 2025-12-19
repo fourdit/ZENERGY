@@ -123,3 +123,13 @@ ADD COLUMN `points` INT DEFAULT 0 AFTER `profile_photo_path`,
 ADD COLUMN `last_login_date` DATE NULL DEFAULT NULL AFTER `points`,
 ADD COLUMN `last_claim` DATE NULL DEFAULT NULL AFTER `last_login_date`,
 ADD COLUMN `login_count` INT DEFAULT 0 AFTER `last_claim`;
+
+-- untuk materi edukasi
+CREATE TABLE IF NOT EXISTS materi_edukasi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    judul VARCHAR(150) NOT NULL,
+    deskripsi VARCHAR(255) NOT NULL,
+    jenis ENUM('artikel','video') NOT NULL,
+    konten TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
