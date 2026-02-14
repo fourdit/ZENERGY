@@ -1,0 +1,139 @@
+/* =======================
+   GENERAL
+======================= */
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* =======================
+   CONTAINER ORANYE
+======================= */
+.orange-container {
+    width: 97%;
+    max-width: 1000px;
+    margin: 30px auto;
+    background: linear-gradient(#f6a55d, #f7c27d);
+    padding: 35px;
+    border-radius: 26px;
+}
+
+/* =======================
+   TITLE
+======================= */
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* =======================
+   SLIDER / HORIZONTAL SCROLL
+======================= */
+/* ROW SLIDER (horizontal scroll) */
+.slider-row {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scroll-behavior: smooth;
+    white-space: nowrap; /* PENTING!!! */
+}
+
+.slider-row::-webkit-scrollbar {
+    height: 8px;
+}
+
+.slider-row::-webkit-scrollbar-thumb {
+    background: #d28c49;
+    border-radius: 10px;
+}
+
+/* CARD SLIDER */
+.article-card,
+.video-card {
+    width: 280px;          /* PENTING! jangan 100% */
+    min-width: 280px;   /* atau 260px kalau mau lebih ramping */
+    flex: 0 0 auto;        /* PENTING! biar ga melar */
+    background: #f6e2c4;
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    white-space: normal;   /* text boleh wrap */
+}
+
+/* GAMBAR CARD */
+.article-card img,
+.video-card img {
+    width: 100%;
+    height: 1600px;
+    object-fit: cover;
+}
+
+/* =======================
+   CARD ARTIKEL
+======================= */
+.article-card {
+    min-width: 380px;
+    background: #f6e2c4;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.article-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+.article-content {
+    padding: 20px;
+}
+
+.article-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.article-desc {
+    font-size: 14px;
+    color: #333;
+}
+
+/* =======================
+   VIDEO CARD
+======================= */
+.video-card {
+    min-width: 380px;
+    background: #f6e2c4;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.video-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+.video-title {
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.app-body {
+    display: flex;
+    overflow: visible !important;
+}
+
+.main-content {
+    width: 100% !important;
+    flex: 1 !important;
+    padding-top: 30px !important;
+    min-height: 100vh;
+    height: auto !important;
+    overflow-y: visible !important;
+}

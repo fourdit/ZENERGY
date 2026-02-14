@@ -1,0 +1,73 @@
+[
+    {
+        "id": 4,
+        "user": "Mira",
+        "text": "izin share yaaa\r\n\r\n",
+        "image": "1764067246_listrik.jpg",
+        "time": "2025-11-25 11:40:46",
+        "comments": [
+            {
+                "user": "Dim",
+                "text": "okee, makasih infonya kak",
+                "time": "2025-11-25 11:47:18"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "user": "Mira",
+        "text": "nih guys buat yang mau menghemat token listrik. pake kode digambar ini yaa",
+        "image": "1764067027_promo.jpg",
+        "time": "2025-11-25 11:37:07",
+        "comments": [
+            {
+                "user": "Dim",
+                "text": "okee, makasih infonya kak",
+                "time": "2025-11-25 11:47:18"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "user": "ryuuu",
+        "text": "guys, ini cara ngatasin biar biaya listriknya ga gede banget gimana ya...",
+        "image": "1763893393_listrikk.jpeg",
+        "time": "2025-11-23 11:23:13",
+        "comments": [
+            {
+                "user": "ceay",
+                "text": "mjb kak ryuu. klo kakanya pake ac, mesin cuci, kulkas dan mesin2 yg makan watt gede, coba dikurangin kak pemakaiannyaa",
+                "time": "2025-11-23 11:41:41"
+            },
+            {
+                "user": "ryuuu",
+                "text": "okee makasih kak ceay",
+                "time": "2025-11-23 11:41:49"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "user": "y",
+        "text": "Mau nanya, aku masih awam banget dan masih bingung tentang listrik karena sebelumnya yang ngurus kan orang tua aku. Bulan lalu, aku mulai ngekost. tapi kok tagihannya besar banget yaa... ",
+        "image": "",
+        "time": "2025-11-19 07:48:30",
+        "comments": [
+            {
+                "user": "Jiwoo",
+                "text": "kurangin penggunaan ACnya kak klo pake AC, terus cek alat alat yang makan watt gede kaya kulkas, ricecooker, dsbnya",
+                "time": "2025-11-19 07:51:50"
+            },
+            {
+                "user": "sho",
+                "text": "iyaa betul",
+                "time": "2025-11-19 12:08:29"
+            },
+            {
+                "user": "Mira",
+                "text": "betull, setuju banget sama jiwoo",
+                "time": "2025-11-25 11:37:52"
+            }
+        ]
+    }
+]

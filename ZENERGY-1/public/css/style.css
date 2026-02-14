@@ -1,0 +1,320 @@
+/**
+ * File: css/style.css
+ * Deskripsi: Stylesheet untuk FAQ Zenergy (Isolated dengan namespace .faq-page)
+ * CATATAN: Hanya berlaku untuk halaman FAQ, tidak mempengaruhi komponen lain
+ */
+
+/* ===========================================
+   FAQ PAGE SPECIFIC STYLES (Isolated)
+   =========================================== */
+
+/* FAQ Page Wrapper - pastikan semua style dalam scope ini */
+.faq-page-wrapper {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* FAQ Container */
+.faq-page-wrapper .faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* FAQ Header */
+.faq-page-wrapper .faq-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.faq-page-wrapper .faq-header h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.faq-page-wrapper .faq-header .subtitle {
+    color: #666;
+    font-size: 16px;
+}
+
+/* Search Container (opsional) */
+.faq-page-wrapper .search-container {
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.faq-page-wrapper .search-box {
+    position: relative;
+}
+
+.faq-page-wrapper .search-box input {
+    width: 100%;
+    padding: 15px 50px 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 30px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.faq-page-wrapper .search-box input:focus {
+    outline: none;
+    border-color: #FF9E3A;
+    box-shadow: 0 0 0 3px rgba(255, 158, 58, 0.1);
+}
+
+.faq-page-wrapper .search-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 18px;
+}
+
+/* Tab Navigation */
+.faq-page-wrapper .tab-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.faq-page-wrapper .tab-btn {
+    padding: 12px 30px;
+    border: none;
+    background-color: #fff;
+    color: #666;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    font-weight: 500;
+}
+
+.faq-page-wrapper .tab-btn:hover {
+    background-color: #FFF5E8;
+    color: #FF9E3A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255,158,58,0.2);
+}
+
+.faq-page-wrapper .tab-btn.active {
+    background-color: #FF9E3A;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(255,158,58,0.3);
+}
+
+/* FAQ Content */
+.faq-page-wrapper .faq-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* FAQ Section */
+.faq-page-wrapper .faq-section {
+    margin-bottom: 40px;
+}
+
+.faq-page-wrapper .section-title {
+    font-size: 24px;
+    color: #333;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #FF9E3A;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* FAQ List */
+.faq-page-wrapper .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* FAQ Item */
+.faq-page-wrapper .faq-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.faq-page-wrapper .faq-item:hover {
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+/* FAQ Question */
+.faq-page-wrapper .faq-question {
+    padding: 18px 20px;
+    background-color: #fafafa;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.faq-page-wrapper .faq-question:hover {
+    background-color: #FFF5E8;
+}
+
+.faq-page-wrapper .faq-item.active .faq-question {
+    background-color: #FF9E3A;
+    color: #fff;
+}
+
+.faq-page-wrapper .faq-question i {
+    transition: transform 0.3s ease;
+    font-size: 14px;
+}
+
+.faq-page-wrapper .faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+/* FAQ Answer */
+.faq-page-wrapper .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    background-color: #fff;
+}
+
+.faq-page-wrapper .faq-item.active .faq-answer {
+    max-height: 500px;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.faq-page-wrapper .faq-answer p {
+    color: #555;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+/* No Data */
+.faq-page-wrapper .no-data {
+    text-align: center;
+    color: #999;
+    padding: 30px;
+    font-style: italic;
+}
+
+/* Help Footer */
+.faq-page-wrapper .help-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.faq-page-wrapper .help-footer p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* Search Results Highlight */
+.faq-page-wrapper mark {
+    background-color: #FFEB3B;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+/* No Results Message */
+.faq-page-wrapper .no-results-message {
+    text-align: center;
+    padding: 60px 20px;
+    display: none;
+}
+
+.faq-page-wrapper .no-results {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.faq-page-wrapper .no-results i {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.faq-page-wrapper .no-results p {
+    color: #666;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.faq-page-wrapper .no-results .hint {
+    font-size: 14px;
+    color: #999;
+}
+
+/* Animation */
+.faq-page-wrapper .faq-section {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .faq-page-wrapper .faq-header h1 {
+        font-size: 28px;
+    }
+    
+    .faq-page-wrapper .tab-navigation {
+        gap: 10px;
+    }
+    
+    .faq-page-wrapper .tab-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .faq-page-wrapper .faq-content {
+        padding: 20px;
+    }
+    
+    .faq-page-wrapper .section-title {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .faq-page-wrapper .faq-question {
+        padding: 15px;
+        font-size: 14px;
+    }
+    
+    .faq-page-wrapper .faq-answer p {
+        font-size: 14px;
+    }
+}
+
+

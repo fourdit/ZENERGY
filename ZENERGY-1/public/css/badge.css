@@ -1,0 +1,190 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #ffffff;
+    color: #1e2532;
+    font-weight: 400;
+}
+
+/* === CONTAINER MAIN === */
+.badge-wrapper {
+    padding: 30px;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* === TITLE === */
+.badge-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 22px;
+    color: #d78c28; /* Warna oranye */
+}
+
+
+/* === BADGE SECTION === */
+.badge-section {
+    background: #fff4e5;
+    padding: 25px 30px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 35px;
+}
+
+.left-info {
+    width: 55%;
+}
+
+.right-info {
+    width: 40%;
+    text-align: right;
+}
+
+.badge-label {
+    background: #d78c28;
+    padding: 8px 20px;
+    border-radius: 25px;
+    color: white;
+    font-weight: 500;
+    font-size: 13px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.message-title {
+    margin-top: 6px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #222;
+}
+
+.small-text {
+    margin-top: 4px;
+    color: #EF7722;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+/* === BUTTON CLAIM === */
+.btn-claim {
+    background: black;
+    color: white;
+    padding: 10px 24px;
+    font-size: 14px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 500;
+    border: none;
+    margin-bottom: 8px;
+}
+
+.btn-claim:disabled {
+    background: #9e9e9e;
+    cursor: not-allowed;
+}
+
+/* === STREAK HEADER === */
+.streak-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    margin-top: 30px;
+}.streak-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 40px 50px;
+    border-radius: 15px;
+    border: 1px solid #eee;
+    margin-top: 20px;
+}
+
+.earned-badge-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #EF7722;
+    margin-bottom: 10px;
+    text-align: left;
+}
+.message-success {
+    margin-top: 8px;
+    color: #28a745;
+    font-weight: 500;
+}
+
+.streak-item {
+    text-align: center;
+    width: 150px;
+}
+
+.streak-icon {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    background-color: transparent !important;
+}
+
+
+
+
+.streak-name {
+    color: #EF7722;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.streak-points {
+    font-size: 22px;
+    font-weight: 700;
+    color: #EF7722;
+    margin: 6px 0 0;
+}
+
+.streak-days {
+    color: #777;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.streak-divider {
+    font-size: 40px;
+    color: #EF7722;
+    margin: 0 10px;
+}
+
+
+
+/* Divider dirapikan */
+.streak-icon {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .badge-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .right-info {
+        text-align: center;
+    }
+
+    .streak-container {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .streak-divider {
+        display: none;
+    }
+}
